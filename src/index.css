@@ -49,3 +49,23 @@ p {
     font-size: 0.75em;
   }
 }
+
+.celebrate {
+  /* background-color: lime;
+  color: black; */
+  animation: celebration 2s ease-in-out infinite;
+  
+}
+
+@keyframes celebration {
+  0%, 100% {
+    background-color: inherit;
+    color: inherit;
+    border-color: inherit;
+  }
+  50% {
+    background-color: lime;
+    color: black;
+    border-color: black ;
+  }
+}

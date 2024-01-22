@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
+import Confetti from "react-dom-confetti";
 
-export default function Countdown({ setTimesUp }) {
+export default function Countdown({ setTimesUp, timesUp }) {
   const [timeUntil, setTimeUntil] = useState({});
+  const [confetti, setConfetti] = useState(false);
 
+  function launchConfetti() {
+    setConfetti(true);
+    setInterval(() => setConfetti(false), "2000");
+  }
   function createCountdown() {
     const endDate = new Date("May 3, 2024 16:00:00").getTime();
     const now = new Date().getTime();
@@ -27,32 +33,51 @@ export default function Countdown({ setTimesUp }) {
   }
   useEffect(() => {
     setInterval(createCountdown, "1000");
+    timesUp && clearInterval(createCountdown);
+    timesUp && setInterval(launchConfetti, "3000");
     return () => {
       clearInterval(createCountdown);
+      clearInterval(launchConfetti);
     };
-  }, []);
+  }, [timesUp]);
   const { days, hours, minutes, seconds } = timeUntil;
+  const config = {
+    angle: 90,
+    spread: 360,
+    startVelocity: 40,
+    elementCount: 70,
+    dragFriction: 0.12,
+    duration: 3000,
+    stagger: 3,
+    width: "10px",
+    height: "10px",
+    perspective: "500px",
+    colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
+  };
   return (
-    <div>
-      <h1>Countdown to Freedom</h1>
-      <div className="countdown">
-        <span>
-          <p>Days:</p>
-          {days}
-        </span>
-        <span>
-          <p>Hours:</p>
-          {hours}
-        </span>
-        <span>
-          <p>Minutes:</p>
-          {minutes}
-        </span>
-        <span>
-          <p>Seconds:</p>
-          {seconds}
-        </span>
+    <>
+      <div>
+        <Confetti active={confetti} config={config}></Confetti>
+        {!timesUp ? <h1>Countdown to Freedom</h1> : <h1>YOU'RE FREE</h1>}
+        <div className="countdown">
+          <span className={`${timesUp && "celebrate"}`}>
+            <p>Days:</p>
+            {days}
+          </span>
+          <span className={`${timesUp && "celebrate"}`}>
+            <p>Hours:</p>
+            {hours}
+          </span>
+          <span className={`${timesUp && "celebrate"}`}>
+            <p>Minutes:</p>
+            {minutes}
+          </span>
+          <span className={`${timesUp && "celebrate"}`}>
+            <p>Seconds:</p>
+            {seconds}
+          </span>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
