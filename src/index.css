@@ -1,0 +1,51 @@
+html {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.App {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+body {
+  background-color: #222222;
+  color: white;
+}
+span {
+  display: grid;
+  place-items: center;
+  font-size: 3em;
+  border: 1px solid white;
+  border-radius: 1rem;
+  width: 2em;
+  aspect-ratio: 1;
+}
+
+.countdown {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  font-size: 0.25em;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  body {
+    font-size: 0.75em;
+  }
+}
