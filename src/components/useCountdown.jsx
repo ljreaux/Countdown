@@ -6,7 +6,7 @@ export default function useCountdown(date = Date.now()) {
   useEffect(() => {
     function createCountdown() {
       const endDate = new Date(date).getTime();
-      const now = new Date().getTime();
+      const now = Date.now();
       const time = endDate - now;
       const until = {
         days: Math.floor(time / (1000 * 60 * 60 * 24)),

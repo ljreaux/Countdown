@@ -3,7 +3,7 @@ import useCountdown from "./useCountdown";
 import Confetti from "react-dom-confetti";
 
 export default function Countdown() {
-  const { countdown, timesUp } = useCountdown("May 3, 2024 16:00:00");
+  const { countdown, timesUp } = useCountdown("2024-05-03T16:00:00-05:00");
 
   const [confetti, setConfetti] = useState(false);
   useEffect(() => {
